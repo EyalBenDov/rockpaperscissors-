@@ -49,7 +49,7 @@ winner_dict = {
     }
 }
 
-
+// get and print out wether player or lost, and incremet computerScore/humanScore accordingly
 function playRound(humanChoice, computerChoice) {
     let result = winner_dict[humanChoice][computerChoice]
     if (result == true) {
