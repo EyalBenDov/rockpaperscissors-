@@ -11,21 +11,6 @@ function getComputerChoice() {
     return "scissors" 
 }
 
-// Get the choice of human player
-function getHumanChoice() {
-    let entered = false;
-    while (!entered) {
-        let response = prompt("Enter rock paper or scissors");
-        response = (response == null) ? "" : response.toLowerCase()
-        if (response == "rock" || response == "paper" || response == "scissors") {
-            entered = true;
-            return response;
-        }
-        if (response == "rock paper or scissors") {
-            alert("why?");
-        }
-    }
-}
 
 let humanScore = 0;
 let computerScore = 0;
@@ -49,24 +34,41 @@ winner_dict = {
     }
 }
 
+let humanChoice = "";
+let rounds = Number(prompt("How many rounds?"))
+let current_round = 0
+display = document.querySelector("#result")
+for (let button of document.querySelectorAll("#rps button")) {
+    console.log("potato")
+    button.addEventListener("click", () => {
+        if (current_round < rounds) {
+            humanChoice = button.textContent
+            playRound(getComputerChoice())
+            display.textContent = "User: " + humanScore + "    Computer: " + computerScore
+        } else {
+            if (humanScore > computerScore)
+                alert("You win!")
+            else if (computerScore > humanChoice)
+                alert("you lose!")
+            else {
+                alert("draw!")
+            }
+        }
+    })
+}
 // get and print out wether player or lost, and incremet computerScore/humanScore accordingly
-function playRound(humanChoice, computerChoice) {
+function playRound(computerChoice) {
     let result = winner_dict[humanChoice][computerChoice]
+    current_round++
     if (result == true) {
         humanScore++;
-        alert("You won! " + humanChoice + " beats " + computerChoice + "!")
+        // return ("You won! " + humanChoice + " beats " + computerChoice + "!")
     }
     else if (result == false) {
         computerScore++;
-        alert("You Lost! " + computerChoice + " beats " + humanChoice + "!")
+        // return ("You Lost! " + computerChoice + " beats " + humanChoice + "!")
     }
     else {
-        alert("It was a draw! " + humanChoice + " is the same as " + computerChoice + "!")
+        // return ("It was a draw! " + humanChoice + " is the same as " + computerChoice + "!")
     }
 }
-
-let total_rounds = 5;
-
-for (let i = 0; i < total_rounds; i++) playRound(getHumanChoice(), getComputerChoice());
-
-alert("Final results: \n    You won " + humanScore + " times \n    Computer won: " + computerScore + " times \n    and there were " + (5-computerScore-humanScore) + " draws");
