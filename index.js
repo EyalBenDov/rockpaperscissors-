@@ -48,7 +48,7 @@ for (let button of document.querySelectorAll("#rps button")) {
         } else {
             if (humanScore > computerScore)
                 alert("You win!")
-            else if (computerScore > humanChoice)
+            else if (computerScore > humanScore)
                 alert("you lose!")
             else {
                 alert("draw!")
